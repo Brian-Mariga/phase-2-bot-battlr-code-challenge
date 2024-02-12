@@ -36,6 +36,7 @@ function BotCollection() {
   }, []);
 
   function handleDelete(id) {
+    console.log("Deleted");
     fetch(`http://localhost:8001/bots/${id}`, {
       method: "DELETE",
     });
@@ -69,6 +70,7 @@ function BotCollection() {
       <CardFooter>
         <ButtonGroup spacing="2">
           <Button
+            onClick={() => handleDelete(bot.id)}
             variant="solid"
             colorScheme="red"
             w="200px"
