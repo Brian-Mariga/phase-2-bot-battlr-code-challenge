@@ -1,0 +1,12 @@
+Card {
+    border-width: 1px;
+    border-radius: "lg";
+    border-color: blue;
+    overflow: hidden;
+    width: 300px;
+    margin: 1rem;
+    align-items: center;
+    justify-content: center;
+    background: "#eaf6ff";
+  }
+  
