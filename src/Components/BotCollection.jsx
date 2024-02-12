@@ -35,6 +35,12 @@ function BotCollection() {
       });
   }, []);
 
+  function handleDelete(id) {
+    fetch(`http://localhost:8001/bots/${id}`, {
+      method: "DELETE",
+    });
+  }
+
   const cards = data.map((bot) => (
     <Card
       maxW="sm"
@@ -43,7 +49,7 @@ function BotCollection() {
       borderRadius="lg"
       borderColor="blue"
       overflow="hidden"
-      width="300px"
+      width="250px"
       margin="1rem"
       alignItems="center"
       justifyContent="center"
@@ -53,7 +59,7 @@ function BotCollection() {
         <Heading size="md">Name: {bot.name}</Heading>
         <Text color="black">ID: {bot.id}</Text>
         <Image src={bot.avatar_url} alt={bot.name} borderRadius="lg" />
-        <Stack mt="6" spacing="3">
+        <Stack mt="6" spacing="0">
           <Text color="black">Class: {bot.bot_class}</Text>
           <Text color="green">Health: {bot.health}</Text>
           <Text color="red">Damage: {bot.damage}</Text>
@@ -78,9 +84,10 @@ function BotCollection() {
 
   return (
     <div>
+      <h1 className="title">Bot Collection</h1>
       {error && <p>{error}</p>}
       {loading && <p>Loading...</p>}
-      <div>{cards}</div>
+      <div className="cards">{cards}</div>
     </div>
   );
 }
