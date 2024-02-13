@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 
 function BotCollection() {
   const [data, setData] = useState([]);
+  const [botArmy, setBotArmy] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -35,6 +36,11 @@ function BotCollection() {
       });
   }, []);
 
+  function handleClick(id) {
+    setBotArmy([...botArmy, data.filter((army) => army.id == id)]);
+    console.log(botArmy);
+  }
+
   function handleDelete(id) {
     console.log("Deleted");
     fetch(`http://localhost:8001/bots/${id}`, {
@@ -44,6 +50,7 @@ function BotCollection() {
 
   const cards = data.map((bot) => (
     <Card
+      onClick={() => handleClick(bot.id)}
       maxW="sm"
       key={bot.id}
       borderWidth="1px"
@@ -89,6 +96,7 @@ function BotCollection() {
       <h1 className="title">Bot Collection</h1>
       {error && <p>{error}</p>}
       {loading && <p>Loading...</p>}
+      <h3>Click on a Bot to add it to Your Bot Army</h3>
       <div className="cards">{cards}</div>
     </div>
   );
