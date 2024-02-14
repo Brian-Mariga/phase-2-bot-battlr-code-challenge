@@ -1,25 +1,28 @@
 import React from "react";
-import "./App.css";
 import BotCollection from "./Components/BotCollection";
-import NavBar from "./Components/NavBar";
 import YourBotArmy from "./Components/YourBotArmy";
+import { SharedBotProvider } from "./Components/SharedBotProvider";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import NavBar from "./Components/NavBar";
+import "./App.css";
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <NavBar />
-        <Switch>
-          <Route exact path="/">
-            <BotCollection />
-          </Route>
-          <Route path="/bot-army">
-            <YourBotArmy />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <SharedBotProvider>
+      <Router>
+        <div className="App">
+          <NavBar />
+          <Switch>
+            <Route exact path="/">
+              <BotCollection />
+            </Route>
+            <Route path="/bot-army">
+              <YourBotArmy />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </SharedBotProvider>
   );
 }
 

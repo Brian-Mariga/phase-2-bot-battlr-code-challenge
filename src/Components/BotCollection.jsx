@@ -12,12 +12,12 @@ import {
   Text,
 } from "@chakra-ui/react";
 import useFetch from "./useFetch";
-import YourBotArmy from "./YourBotArmy";
+import { useSharedBot } from "./SharedBotProvider";
 
 function BotCollection() {
-  const { data, loading, error, addToArmy } = useFetch(
-    "http://localhost:8001/bots"
-  );
+  const { addToArmy } = useSharedBot();
+
+  const { data, loading, error } = useFetch("http://localhost:8001/bots");
 
   function handleDelete(id) {
     console.log("Deleted");
@@ -78,7 +78,6 @@ function BotCollection() {
       {loading && <p>Loading...</p>}
       <h3>Click on a Bot to add it to Your Bot Army</h3>
       <div className="cards">{cards}</div>
-      <YourBotArmy />
     </div>
   );
 }

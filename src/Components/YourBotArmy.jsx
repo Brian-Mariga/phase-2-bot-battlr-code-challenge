@@ -9,10 +9,11 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import useFetch from "./useFetch";
+
+import { useSharedBot } from "./SharedBotProvider";
 
 function YourBotArmy() {
-  const { army, removeFromArmy } = useFetch("http://localhost:8001/bots");
+  const { army, removeFromArmy } = useSharedBot();
 
   const armyCards = army.map((bot) => (
     <Card
@@ -50,7 +51,7 @@ function YourBotArmy() {
     <>
       <h1 className="title">Your Bot Army</h1>
       <h3>Click on a Bot to remove it from Your Bot Army</h3>
-      <div>{armyCards}</div>
+      <div className="cards">{armyCards}</div>
     </>
   );
 }
