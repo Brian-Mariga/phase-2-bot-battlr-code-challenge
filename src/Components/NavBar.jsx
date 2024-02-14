@@ -1,5 +1,3 @@
-// import { Link } from "@chakra-ui/react";
-
 import { Link } from "react-router-dom";
 
 function NavBar() {

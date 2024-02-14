@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Button,
   ButtonGroup,
@@ -10,36 +11,13 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import useFetch from "./useFetch";
+import YourBotArmy from "./YourBotArmy";
 
 function BotCollection() {
-  const [data, setData] = useState([]);
-  const [botArmy, setBotArmy] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetch("http://localhost:8001/bots")
-      .then((res) => {
-        if (!res.ok) {
-          throw Error("Could not fetch the data for that resource");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
-
-  function handleClick(id) {
-    setBotArmy([...botArmy, data.filter((army) => army.id == id)]);
-    console.log(botArmy);
-  }
+  const { data, loading, error, addToArmy } = useFetch(
+    "http://localhost:8001/bots"
+  );
 
   function handleDelete(id) {
     console.log("Deleted");
@@ -50,7 +28,9 @@ function BotCollection() {
 
   const cards = data.map((bot) => (
     <Card
-      onClick={() => handleClick(bot.id)}
+      onClick={() => {
+        addToArmy(bot);
+      }}
       maxW="sm"
       key={bot.id}
       borderWidth="1px"
@@ -98,6 +78,7 @@ function BotCollection() {
       {loading && <p>Loading...</p>}
       <h3>Click on a Bot to add it to Your Bot Army</h3>
       <div className="cards">{cards}</div>
+      <YourBotArmy />
     </div>
   );
 }

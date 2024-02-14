@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import BotCollection from "./Components/BotCollection";
 import NavBar from "./Components/NavBar";
